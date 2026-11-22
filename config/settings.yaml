@@ -1,0 +1,20 @@
+# Pacote OLLAMA (local). Caminhos relativos de rules_file/policy_file partem desta pasta.
+base_dir: C:\Challenge
+input_filename: dataset_challenge.csv
+rules_file: motor_regras.txt
+policy_file: politica.txt
+
+llm_provider: ollama
+llm_model: llama3.1:8b            # ollama pull llama3.1:8b
+llm_base_url: http://localhost:11434
+llm_timeout_s: 120                # modelos locais podem demorar mais
+llm_workers: 2                    # ajuste à capacidade da máquina (CPU/GPU)
+mask_pii: true
+
+# Ciclo de reprocessamento (_loop)
+loop_rounds_per_run: 2            # 1ª rodada + 1 retentativa dos pendentes na mesma execução
+loop_retry_delay_s: 5
+max_loop_cycles: 5                # esgotado => pendentes vão para _nok
+
+top_risks: 15
+log_level: INFO
